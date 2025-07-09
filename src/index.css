@@ -6,6 +6,15 @@
   font-family: 'Nunito', sans-serif;
 }
 
+.swiper-pagination-bullet {
+  background-color: #757779 !important;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ff503c !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
