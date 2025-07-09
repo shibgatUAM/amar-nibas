@@ -28,7 +28,7 @@ const slides = [
 
 const HeroSlider = () => {
   return (
-    <div className="bg-[#F2F6F7]">
+    <div className="bg-[#F2F6F7] mb-20">
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         pagination={{ clickable: true }}
