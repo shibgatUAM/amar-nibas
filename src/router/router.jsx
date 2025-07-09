@@ -16,15 +16,15 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        index: 'all-properties',
+        path: 'all-properties',
         Component: AllProperties,
       },
       {
-        index: 'dashboard',
+        path: 'dashboard',
         Component: DashboardLayout,
       },
       {
-        index: 'login',
+        path: 'login',
         Component: Login,
       },
     ],
