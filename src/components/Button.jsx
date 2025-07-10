@@ -7,7 +7,7 @@ const Button = ({ label }) => {
       initial="rest"
       whileHover="hover"
       animate="rest"
-      className="relative overflow-hidden mt-4 px-6 py-2 text-white rounded-md font-medium z-10 cursor-pointer"
+      className="relative overflow-hidden mt-4 px-8 py-6 text-white font-medium z-10 cursor-pointer"
     >
       <span className="relative z-20">{label}</span>
 
