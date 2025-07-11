@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion } from 'motion/react';
 
-const Button = ({ label }) => {
+const Button = ({ label, className = '', ...props }) => {
   return (
     <motion.button
       initial="rest"
       whileHover="hover"
       animate="rest"
-      className="relative overflow-hidden mt-4 px-8 py-6 text-white font-medium z-10 cursor-pointer"
+      className={`relative overflow-hidden text-white font-medium z-10 cursor-pointer ${className}`}
+      {...props}
     >
       <span className="relative z-20">{label}</span>
 
@@ -18,7 +19,7 @@ const Button = ({ label }) => {
           hover: { width: '100%' },
         }}
         transition={{ duration: 0.4, ease: 'easeInOut' }}
-        className="absolute top-0 left-0 h-full bg-[#0B2C3D] z-10"
+        className="absolute top-0 left-0 h-full bg-[#0B2C3D] z-10 origin-left"
       />
 
       {/* Initial static background */}

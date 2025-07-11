@@ -48,7 +48,7 @@ const HeroSlider = () => {
                   {slide.title}
                 </h2>
                 <p className="text-lg text-gray-700">{slide.description}</p>
-                <Button label="Explore Now" />
+                <Button label="Explore Now" className='px-8 py-6'/>
               </motion.div>
               <div
                 className="mt-10 md:mt-0 md:w-1/2"
