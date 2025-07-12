@@ -5,10 +5,17 @@ import { Alert, AlertTitle } from '../ui/alert';
 import { Card, CardContent } from '../ui/card';
 import { CircleCheck, CircleX } from 'lucide-react';
 import Button from '../Button';
+import { motion } from 'motion/react';
 
 const fetchAdvData = async () => {
   const res = await axios.get('http://localhost:3000/advertisements');
   return res.data;
+};
+
+// Motion Animation config
+const fadeRight = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0 },
 };
 
 const Advertisements = () => {
@@ -43,48 +50,57 @@ const Advertisements = () => {
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {ads.map((property) => (
-          <Card
-            key={property.id}
-            className="overflow-hidden shadow hover:shadow-2xl transition-all duration-300"
+        {ads.map((property, index) => (
+          <motion.div
+            key={property._id}
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            data-aos="fade-right"
+            data-aos-offset="300"
+            data-aos-easing="ease-in-sine"
           >
-            <img
-              src={property.image}
-              alt={property.title}
-              className="w-full h-48 object-cover"
-            />
+            <Card className="overflow-hidden shadow hover:shadow-2xl rounded-none transition-all duration-300 p-0">
+              <img
+                src={property.image}
+                alt={property.title}
+                className="w-full h-48 object-cover"
+              />
 
-            <CardContent className="p-4">
-              <h3 className="text-lg font-bold text-[#0B2C3D]">
-                {property.location}
-              </h3>
-              <p className="text-base text-gray-800 mt-1">
-                Min: ৳{' '}
-                {property.priceMin.toLocaleString('en-BD', {
-                  minimumFractionDigits: 2,
-                })}
-                <br />
-                Max: ৳{' '}
-                {property.priceMax.toLocaleString('en-BD', {
-                  minimumFractionDigits: 2,
-                })}
-              </p>
-              <p className="mt-2 text-sm mb-6">
-                {property.verified ? (
-                  <span className="flex items-center gap-2 text-[#25d078] font-medium">
-                    <CircleCheck color="#25d078" /> Verified
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2 text-red-500 font-medium">
-                    <CircleX color="#fb2c36" />
-                    Unverified
-                  </span>
-                )}
-              </p>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-bold text-[#0B2C3D]">
+                  {property.location}
+                </h3>
+                <p className="text-base text-gray-800 mt-1">
+                  Min: ৳{' '}
+                  {property.priceMin.toLocaleString('en-BD', {
+                    minimumFractionDigits: 2,
+                  })}
+                  <br />
+                  Max: ৳{' '}
+                  {property.priceMax.toLocaleString('en-BD', {
+                    minimumFractionDigits: 2,
+                  })}
+                </p>
+                <p className="mt-2 text-sm mb-6">
+                  {property.verified ? (
+                    <span className="flex items-center gap-2 text-[#25d078] font-medium">
+                      <CircleCheck color="#25d078" /> Verified
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2 text-red-500 font-medium">
+                      <CircleX color="#fb2c36" />
+                      Unverified
+                    </span>
+                  )}
+                </p>
 
-              <Button label="Details" className="px-8 py-2" />
-            </CardContent>
-          </Card>
+                <Button label="Details" className="px-8 py-2" />
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
       <div className="flex items-center justify-center">
