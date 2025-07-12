@@ -5,6 +5,7 @@ import { Component } from 'react';
 import AllProperties from '@/pages/AllProperties';
 import DashboardLayout from '@/pages/dashboard/DashboardLayout';
 import Login from '@/pages/authentication/Login';
+import Register from '@/pages/authentication/Register';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: 'login',
         Component: Login,
+      },
+      {
+        path: 'register',
+        Component: Register,
       },
     ],
   },
