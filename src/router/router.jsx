@@ -7,6 +7,7 @@ import DashboardLayout from '@/pages/dashboard/DashboardLayout';
 import Login from '@/pages/authentication/Login';
 import Register from '@/pages/authentication/Register';
 import PrivateRoute from '@/routes/PrivateRoute';
+import NotFound from '@/pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: '*',
+        Component: NotFound,
       },
       {
         path: 'all-properties',
