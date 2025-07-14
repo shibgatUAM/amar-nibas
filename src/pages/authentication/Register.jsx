@@ -31,7 +31,7 @@ const Register = () => {
   const { createUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from || '/dashboard';
+  const from = location.state?.from || '/';
 
   const onSubmit = async (data) => {
     console.log(data, createUser);

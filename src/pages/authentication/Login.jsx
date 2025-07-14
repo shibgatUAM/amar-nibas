@@ -27,7 +27,7 @@ const Login = () => {
   const { signIn } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || '/dashboard';
+  const from = location.state?.from || '/';
 
   const onSubmit = (data) => {
     // console.log(data);

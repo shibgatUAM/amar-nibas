@@ -6,6 +6,7 @@ import AllProperties from '@/pages/AllProperties';
 import DashboardLayout from '@/pages/dashboard/DashboardLayout';
 import Login from '@/pages/authentication/Login';
 import Register from '@/pages/authentication/Register';
+import PrivateRoute from '@/routes/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -18,11 +19,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'all-properties',
-        Component: AllProperties,
+        element: (
+          <PrivateRoute>
+            <AllProperties />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'dashboard',
-        Component: DashboardLayout,
+        element: (
+          <PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'login',
