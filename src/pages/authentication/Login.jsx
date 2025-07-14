@@ -8,13 +8,39 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import useAuth from '@/hooks/useAuth';
 import { Eye, EyeOff } from 'lucide-react';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [showPassword, setShowPassword] = useState(false);
+  const { signIn } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/dashboard';
+
+  const onSubmit = (data) => {
+    // console.log(data);
+    signIn(data.email, data.password)
+      .then(() => {
+        navigate(from, { replace: true });
+        toast.success('Login successful');
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F2F6F7] px-4">
@@ -26,18 +52,27 @@ const Login = () => {
         </CardHeader>
 
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message: 'Invalid email address',
+                    },
+                  })}
                   placeholder="m@example.com"
-                  required
                 />
+                {errors.email && (
+                  <p className="text-red-800 text-sm">{errors.email.message}</p>
+                )}
               </div>
-              <div className="grid gap-2">
+              <div className="grid gap-2 mb-8">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                   <a
@@ -51,8 +86,19 @@ const Login = () => {
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
-                    required
                     placeholder="......"
+                    {...register('password', {
+                      required: 'Password is required',
+                      minLength: {
+                        value: 6,
+                        message: 'Password must be at least 6 characters long',
+                      },
+                      pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/,
+                        message:
+                          'Must include uppercase, lowercase, and special character',
+                      },
+                    })}
                   />
                   <button
                     type="button"
@@ -64,15 +110,15 @@ const Login = () => {
                 </div>
               </div>
             </div>
+            <Button
+              type="submit"
+              className="w-full cursor-pointer rounded-none bg-[#FF503C] text-[#0B2C3D] font-bold text-lg hover:bg-[#0B2C3D] hover:text-white"
+            >
+              Login
+            </Button>
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button
-            type="submit"
-            className="w-full cursor-pointer rounded-none bg-[#FF503C] text-[#0B2C3D] font-bold text-lg hover:bg-[#0B2C3D] hover:text-white"
-          >
-            Login
-          </Button>
           <Button
             variant="outline"
             className="w-full cursor-pointer rounded-none"

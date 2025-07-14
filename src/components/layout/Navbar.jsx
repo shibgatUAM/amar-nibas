@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import Logo from '../../assets/images/logo.png';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Button } from '../ui/button';
@@ -29,6 +29,7 @@ const navItems = [
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
@@ -38,6 +39,7 @@ const Navbar = () => {
       setDropdownOpen(false);
 
       toast.success('Successfully logged out!');
+      navigate('/login');
     } catch (error) {
       error;
       toast.error('Logout failed. Please try again.');

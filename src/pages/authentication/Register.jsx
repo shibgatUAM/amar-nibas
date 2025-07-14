@@ -31,7 +31,7 @@ const Register = () => {
   const { createUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from || '/';
+  const from = location.state?.from || '/dashboard';
 
   const onSubmit = async (data) => {
     console.log(data, createUser);
@@ -53,7 +53,7 @@ const Register = () => {
 
       toast.success('Registration successful!');
 
-      navigate('/dashboard', { replace: true });
+      navigate(from, { replace: true });
     } catch (error) {
       error;
       toast.error('Registration failed!');
