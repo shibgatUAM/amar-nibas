@@ -47,10 +47,8 @@ const UserReviews = () => {
       <Marquee pauseOnHover speed={40} gradient={false}>
         {reviews.map((review, index) => (
           <div key={index} className="px-3">
-            {' '}
-            {/* Padding adds gap */}
             <Card
-              className="min-w-[320px] bg-[#F2F6F7] shadow hover:shadow-xl rounded-none transition-all duration-300"
+              className="min-w-24 bg-[#F2F6F7] shadow hover:shadow-xl rounded-none transition-all duration-300"
               data-aos="zoom-in"
             >
               <CardContent className="text-center space-y-4">
