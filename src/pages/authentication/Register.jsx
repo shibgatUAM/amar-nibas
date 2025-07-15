@@ -219,7 +219,7 @@ const Register = () => {
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <SocialLogin />
+          <SocialLogin label="Register" />
           <p className="text-muted-foreground mt-2">
             Already have an account?{' '}
             <Link to="/login" className="text-[#FF503C] hover:underline">

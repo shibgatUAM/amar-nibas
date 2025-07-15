@@ -5,7 +5,7 @@ import useAuth from '@/hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 
-const SocialLogin = () => {
+const SocialLogin = ({ label }) => {
   const { googleSignIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,7 +34,7 @@ const SocialLogin = () => {
         variant="outline"
         className="w-full cursor-pointer rounded-none"
       >
-        <FcGoogle /> Register with Google
+        <FcGoogle /> {label} with Google
       </Button>
     </>
   );

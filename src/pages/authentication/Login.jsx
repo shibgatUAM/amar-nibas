@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
   const {
@@ -119,12 +120,7 @@ const Login = () => {
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button
-            variant="outline"
-            className="w-full cursor-pointer rounded-none"
-          >
-            <FcGoogle /> Login with Google
-          </Button>
+          <SocialLogin label="Login" />
           <p className="text-muted-foreground mt-2">
             Don’t have an account?{' '}
             <Link to="/register" className="text-[#FF503C] hover:underline">
