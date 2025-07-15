@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -218,12 +219,7 @@ const Register = () => {
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button
-            variant="outline"
-            className="w-full cursor-pointer rounded-none"
-          >
-            <FcGoogle /> Register with Google
-          </Button>
+          <SocialLogin />
           <p className="text-muted-foreground mt-2">
             Already have an account?{' '}
             <Link to="/login" className="text-[#FF503C] hover:underline">
