@@ -42,14 +42,24 @@ const Register = () => {
       const imageFile = data.picture[0];
       const imageUrl = await imageUpload(imageFile);
 
-      // create user
+      // create user in Firebase Auth
       const userCredential = await createUser(data.email, data.password);
       const user = userCredential.user;
 
-      // update firebase profile
+      // update firebase user profile
       await updateProfile(user, {
         displayName: data.fullName,
         photoURL: imageUrl,
+      });
+
+      // Save user to backend MongoDB
+      await axios.post('http://localhost:3000/users', {
+        name: data.fullName,
+        email: data.email,
+        photoURL: imageUrl,
+        role: 'user',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       });
 
       toast.success('Registration successful!');

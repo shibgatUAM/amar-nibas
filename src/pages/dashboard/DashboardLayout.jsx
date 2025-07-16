@@ -54,7 +54,7 @@ export default function DashboardLayout() {
       <div className="flex-1 flex flex-col">
         <header className="bg-[#F2F6F7] px-6 py-4 border-b flex items-center justify-between">
           <h1 className="text-2xl font-bold text-[#0B2C3D]">
-            Welcome to Dashboard
+            Welcome to {user?.displayName}
           </h1>
           <div className="flex items-center gap-4">
             <Avatar>

@@ -8,6 +8,8 @@ import Login from '@/pages/authentication/Login';
 import Register from '@/pages/authentication/Register';
 import PrivateRoute from '@/routes/PrivateRoute';
 import NotFound from '@/pages/NotFound';
+import DashboardHome from '@/pages/dashboard/DashboardHome';
+import AddProperty from '@/pages/dashboard/AddProperty';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,16 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
+    children: [
+      {
+        index: true,
+        Component: DashboardHome,
+      },
+      {
+        path: 'add-property',
+        Component: AddProperty,
+      },
+    ],
   },
 ]);
 

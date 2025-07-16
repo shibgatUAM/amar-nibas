@@ -6,7 +6,14 @@ import {
   ChevronRight,
   HousePlus,
   LayoutGrid,
+  HandCoins,
+  Settings,
+  UserRoundCog,
+  ScanEye,
+  Heart,
+  CalendarDays,
 } from 'lucide-react';
+import { MdSell } from 'react-icons/md';
 
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router';
@@ -14,11 +21,51 @@ import Logo from '../../assets/images/logo.png';
 
 const navItems = [
   { label: 'Dashboard', to: '/dashboard', icon: HomeIcon },
-  { label: 'Add Property', to: '/dashboard/all-property', icon: HousePlus },
+  { label: 'Add Property', to: '/dashboard/add-property', icon: HousePlus },
   {
     label: 'My Added Properties',
     to: '/dashboard/my-added-properties',
     icon: LayoutGrid,
+  },
+  {
+    label: 'My Sold Properties',
+    to: '/dashboard/my-sold-properties',
+    icon: MdSell,
+  },
+  {
+    label: 'Offered Properties',
+    to: '/dashboard/offered-properties',
+    icon: HandCoins,
+  },
+  {
+    label: 'Manage Properties',
+    to: '/dashboard/manage-properties',
+    icon: Settings,
+  },
+  {
+    label: 'Manage Users',
+    to: '/dashboard/manage-users',
+    icon: UserRoundCog,
+  },
+  {
+    label: 'Manage Reviews',
+    to: '/dashboard/manage-reviews',
+    icon: ScanEye,
+  },
+  {
+    label: 'Wishlist',
+    to: '/dashboard/wishlist',
+    icon: Heart,
+  },
+  {
+    label: 'Bookings Property',
+    to: '/dashboard/bookings-property',
+    icon: CalendarDays,
+  },
+  {
+    label: 'My Reviews',
+    to: '/dashboard/my-reviews',
+    icon: ScanEye,
   },
   { label: 'My Profile', to: '/dashboard/my-profile', icon: User },
 ];
