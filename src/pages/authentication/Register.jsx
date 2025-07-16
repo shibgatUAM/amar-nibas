@@ -18,6 +18,7 @@ import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import axiosSecure from '@/hooks/axiosSecure';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -61,6 +62,15 @@ const Register = () => {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       });
+
+      // get token from backend
+      const { data: tokenData } = await axiosSecure.post(
+        'http://localhost:3000/login',
+        {
+          email: data.email,
+        }
+      );
+      localStorage.setItem('access-token', tokenData.token);
 
       toast.success('Registration successful!');
 

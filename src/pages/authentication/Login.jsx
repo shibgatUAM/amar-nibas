@@ -16,6 +16,7 @@ import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import axiosSecure from '@/hooks/axiosSecure';
 
 const Login = () => {
   const {
@@ -30,10 +31,15 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location.state?.from || '/';
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // console.log(data);
+
+    const { data: loginData } = await axiosSecure.post('/login', data);
+    // console.log(loginData);
+
     signIn(data.email, data.password)
       .then(() => {
+        localStorage.setItem('access-token', loginData.token);
         navigate(from, { replace: true });
         toast.success('Login successful');
       })
