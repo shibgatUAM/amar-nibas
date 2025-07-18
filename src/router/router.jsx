@@ -10,6 +10,7 @@ import PrivateRoute from '@/routes/PrivateRoute';
 import NotFound from '@/pages/NotFound';
 import DashboardHome from '@/pages/dashboard/DashboardHome';
 import AddProperty from '@/pages/dashboard/AddProperty';
+import ManageUsers from '@/pages/dashboard/ManageUsers';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: 'add-property',
         Component: AddProperty,
+      },
+      {
+        path: 'manage-users',
+        Component: ManageUsers,
       },
     ],
   },

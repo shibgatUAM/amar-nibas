@@ -18,61 +18,94 @@ import { MdSell } from 'react-icons/md';
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router';
 import Logo from '../../assets/images/logo.png';
-
-const navItems = [
-  { label: 'Dashboard', to: '/dashboard', icon: HomeIcon },
-  { label: 'Add Property', to: '/dashboard/add-property', icon: HousePlus },
-  {
-    label: 'My Added Properties',
-    to: '/dashboard/my-added-properties',
-    icon: LayoutGrid,
-  },
-  {
-    label: 'My Sold Properties',
-    to: '/dashboard/my-sold-properties',
-    icon: MdSell,
-  },
-  {
-    label: 'Offered Properties',
-    to: '/dashboard/offered-properties',
-    icon: HandCoins,
-  },
-  {
-    label: 'Manage Properties',
-    to: '/dashboard/manage-properties',
-    icon: Settings,
-  },
-  {
-    label: 'Manage Users',
-    to: '/dashboard/manage-users',
-    icon: UserRoundCog,
-  },
-  {
-    label: 'Manage Reviews',
-    to: '/dashboard/manage-reviews',
-    icon: ScanEye,
-  },
-  {
-    label: 'Wishlist',
-    to: '/dashboard/wishlist',
-    icon: Heart,
-  },
-  {
-    label: 'Bookings Property',
-    to: '/dashboard/bookings-property',
-    icon: CalendarDays,
-  },
-  {
-    label: 'My Reviews',
-    to: '/dashboard/my-reviews',
-    icon: ScanEye,
-  },
-  { label: 'My Profile', to: '/dashboard/my-profile', icon: User },
-];
+import useAuth from '@/hooks/useAuth';
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const { user, loading } = useAuth();
+  const role = user?.role;
+
+  const navItems = [
+    {
+      label: 'Dashboard',
+      to: '/dashboard',
+      icon: HomeIcon,
+      roles: ['admin', 'user', 'agent'],
+    },
+    {
+      label: 'Add Property',
+      to: '/dashboard/add-property',
+      icon: HousePlus,
+      roles: ['agent'],
+    },
+    {
+      label: 'My Added Properties',
+      to: '/dashboard/my-added-properties',
+      icon: LayoutGrid,
+      roles: ['agent'],
+    },
+    {
+      label: 'My Sold Properties',
+      to: '/dashboard/my-sold-properties',
+      icon: MdSell,
+      roles: ['agent'],
+    },
+    {
+      label: 'Offered Properties',
+      to: '/dashboard/offered-properties',
+      icon: HandCoins,
+      roles: ['agent'],
+    },
+    {
+      label: 'Manage Properties',
+      to: '/dashboard/manage-properties',
+      icon: Settings,
+      roles: ['admin'],
+    },
+    {
+      label: 'Manage Users',
+      to: '/dashboard/manage-users',
+      icon: UserRoundCog,
+      roles: ['admin'],
+    },
+    {
+      label: 'Manage Reviews',
+      to: '/dashboard/manage-reviews',
+      icon: ScanEye,
+      roles: ['admin'],
+    },
+    {
+      label: 'Wishlist',
+      to: '/dashboard/wishlist',
+      icon: Heart,
+      roles: ['user'],
+    },
+    {
+      label: 'Bookings Property',
+      to: '/dashboard/bookings-property',
+      icon: CalendarDays,
+      roles: ['user'],
+    },
+    {
+      label: 'My Reviews',
+      to: '/dashboard/my-reviews',
+      icon: ScanEye,
+      roles: ['user'],
+    },
+    {
+      label: 'My Profile',
+      to: '/dashboard/my-profile',
+      icon: User,
+      roles: ['user', 'admin', 'agent'],
+    },
+  ];
+
+  if (loading || !user?.role) {
+    return <div>Loading...</div>;
+  }
+
+  const filteredNavItems = navItems.filter((item) => item.roles.includes(role));
 
   return (
     <aside
@@ -119,7 +152,7 @@ const Sidebar = () => {
       </div>
 
       <nav className="flex flex-col gap-2 px-2">
-        {navItems.map((item) => {
+        {filteredNavItems.map((item) => {
           const isActive = location.pathname === item.to;
           const Icon = item.icon;
 

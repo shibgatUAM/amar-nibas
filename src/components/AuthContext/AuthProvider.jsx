@@ -9,6 +9,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { auth } from '@/firebase/firebase.init';
+import axiosSecure from '@/hooks/axiosSecure';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -37,8 +38,32 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        try {
+          const res = await axiosSecure.get(`/users/${currentUser.email}`);
+          const mongoUser = res.data;
+
+          setUser({
+            uid: currentUser.uid,
+            email: currentUser.email,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+            role: mongoUser.role || 'user',
+          });
+        } catch (error) {
+          error;
+          setUser({
+            uid: currentUser.uid,
+            email: currentUser.email,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+            role: 'user',
+          });
+        }
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
 
