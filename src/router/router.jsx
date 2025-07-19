@@ -11,6 +11,7 @@ import NotFound from '@/pages/NotFound';
 import DashboardHome from '@/pages/dashboard/DashboardHome';
 import AddProperty from '@/pages/dashboard/AddProperty';
 import ManageUsers from '@/pages/dashboard/ManageUsers';
+import MyProfile from '@/pages/dashboard/MyProfile';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: 'manage-users',
         Component: ManageUsers,
+      },
+      {
+        path: 'my-profile',
+        Component: MyProfile,
       },
     ],
   },

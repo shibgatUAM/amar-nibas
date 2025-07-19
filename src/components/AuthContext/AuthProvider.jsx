@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         try {
-          const res = await axiosSecure.get(`/users/${currentUser.email}`);
+          const res = await axiosSecure.get(`/api/users/${currentUser.email}`);
           const mongoUser = res.data;
 
           setUser({
@@ -75,6 +75,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     loading,
     user,
+    setUser,
     createUser,
     signIn,
     logOut,
