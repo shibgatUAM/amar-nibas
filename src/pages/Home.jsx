@@ -3,6 +3,8 @@ import Advertisements from '@/components/Home/Advertisements';
 import UserReviews from '@/components/Home/UserReviews';
 
 import React from 'react';
+import AboutUs from '@/components/Home/AboutUs';
+import ContactUs from '@/components/Home/ContactUs';
 
 const Home = () => {
   return (
@@ -10,6 +12,8 @@ const Home = () => {
       <HeroSlider />
       <Advertisements />
       <UserReviews />
+      <AboutUs />
+      <ContactUs />
     </div>
   );
 };

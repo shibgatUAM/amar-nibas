@@ -36,7 +36,7 @@ const UserReviews = () => {
     );
 
   return (
-    <div className="py-12 px-4 max-w-7xl mx-auto">
+    <div className="py-12 px-4 max-w-7xl mx-auto mb-10">
       <h2 className="text-4xl font-extrabold text-center text-[#0B2C3D] mb-2">
         What Our Users Say About Us
       </h2>
