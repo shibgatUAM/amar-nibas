@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import PropertyCard from './PropertyCard/PropertyCard';
 import toast from 'react-hot-toast';
+import UpdatePropertyModal from './PropertyCard/UpdatePropertyModal';
 
 const MyAddedProperties = () => {
   const { user } = useAuth();

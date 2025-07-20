@@ -197,7 +197,10 @@ const AddProperty = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full rounded-none">
+            <Button
+              type="submit"
+              className="w-full rounded-none cursor-pointer"
+            >
               Add Property
             </Button>
           </form>
