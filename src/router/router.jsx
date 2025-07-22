@@ -13,6 +13,7 @@ import AddProperty from '@/pages/dashboard/AddProperty';
 import ManageUsers from '@/pages/dashboard/ManageUsers';
 import MyProfile from '@/pages/dashboard/MyProfile';
 import MyAddedProperties from '@/pages/dashboard/MyAddedProperties';
+import ManagePropertiesPage from '@/pages/dashboard/ManageProperties/ManagePropertiesPage';
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: 'manage-users',
         Component: ManageUsers,
+      },
+      {
+        path: 'manage-properties',
+        Component: ManagePropertiesPage,
       },
       {
         path: 'my-profile',
