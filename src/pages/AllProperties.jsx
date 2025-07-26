@@ -1,19 +1,20 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Alert, AlertTitle } from '@/components/ui/alert';
 import axiosSecure from '@/hooks/axiosSecure';
 import useAuth from '@/hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { BadgeCheckIcon, Heart, Info } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const AllProperties = () => {
   const { user } = useAuth();
   const userEmail = user?.email;
-
-  const [expandedId, setExpandedId] = useState(null);
   const [wishlistIds, setWishlistIds] = useState([]);
+  const navigate = useNavigate();
 
   const {
     data: properties = [],
@@ -73,16 +74,22 @@ const AllProperties = () => {
     }
   };
 
-  const toggleDetails = (id) => {
-    setExpandedId((prev) => (prev === id ? null : id));
+  const handleDetails = (id) => {
+    navigate(`/properties/${id}`);
   };
 
-  if (isLoading) return <div className="text-center py-10">Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center py-16">
+        <div className="w-10 h-10 border-4 border-dashed rounded-full animate-spin border-[#FF503C]"></div>
+      </div>
+    );
+
   if (isError)
     return (
-      <div className="text-center text-red-500 py-10">
-        Failed to load properties
-      </div>
+      <Alert variant="destructive">
+        <AlertTitle>{isError.message}</AlertTitle>
+      </Alert>
     );
 
   return (
@@ -132,28 +139,13 @@ const AllProperties = () => {
 
               <Button
                 variant="outline"
-                onClick={() => toggleDetails(property._id)}
                 className="flex items-center gap-2 cursor-pointer"
+                onClick={() => handleDetails(property._id)}
               >
-                <Info className="w-4 h-4" />{' '}
-                {expandedId === property._id ? 'Hide' : 'Details'}
+                <Info className="w-4 h-4" />
+                Details
               </Button>
             </div>
-
-            {expandedId === property._id && (
-              <div className="bg-gray-100 mt-4 p-3 rounded-md text-sm space-y-1 text-gray-700">
-                <p>
-                  <strong>Description:</strong>{' '}
-                  {property.description || 'No description available.'}
-                </p>
-                <p>
-                  <strong>Agent:</strong> {property.agentName || 'N/A'}
-                </p>
-                <p>
-                  <strong>Contact:</strong> {property.contact || 'N/A'}
-                </p>
-              </div>
-            )}
           </CardContent>
         </Card>
       ))}

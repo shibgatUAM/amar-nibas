@@ -14,6 +14,9 @@ import ManageUsers from '@/pages/dashboard/ManageUsers';
 import MyProfile from '@/pages/dashboard/MyProfile';
 import MyAddedProperties from '@/pages/dashboard/MyAddedProperties';
 import ManagePropertiesPage from '@/pages/dashboard/ManageProperties/ManagePropertiesPage';
+import PropertyDetails from '@/pages/PropertyDetails';
+import Success from '@/pages/Payment/Success';
+import Cancel from '@/pages/Payment/Cancel';
 
 const router = createBrowserRouter([
   {
@@ -37,12 +40,28 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: 'properties/:id',
+        element: (
+          <PrivateRoute>
+            <PropertyDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: 'login',
         Component: Login,
       },
       {
         path: 'register',
         Component: Register,
+      },
+      {
+        path: 'success',
+        element: <Success />,
+      },
+      {
+        path: 'cancel',
+        element: <Cancel />,
       },
     ],
   },
