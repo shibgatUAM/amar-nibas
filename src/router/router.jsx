@@ -17,6 +17,7 @@ import ManagePropertiesPage from '@/pages/dashboard/ManageProperties/ManagePrope
 import PropertyDetails from '@/pages/PropertyDetails';
 import Success from '@/pages/Payment/Success';
 import Cancel from '@/pages/Payment/Cancel';
+import WishList from '@/pages/dashboard/WishList';
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
       {
         path: 'my-profile',
         Component: MyProfile,
+      },
+      {
+        path: 'wishlist',
+        Component: WishList,
       },
     ],
   },
