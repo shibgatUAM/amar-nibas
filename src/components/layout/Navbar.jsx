@@ -103,7 +103,7 @@ const Navbar = () => {
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md py-2 z-50">
                   <Link
-                    to="/dashboard"
+                    to="/dashboard/my-profile"
                     className="flex items-center px-4 py-2 text-sm hover:bg-gray-100"
                     onClick={() => setDropdownOpen(false)}
                   >

@@ -47,12 +47,12 @@ const AuthProvider = ({ children }) => {
           setUser({
             uid: currentUser.uid,
             email: currentUser.email,
-            displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL,
+            displayName: mongoUser.name || currentUser.displayName,
+            photoURL: mongoUser.photoURL || currentUser.photoURL,
             role: mongoUser.role || 'user',
           });
         } catch (error) {
-          error;
+          console.error(error);
           setUser({
             uid: currentUser.uid,
             email: currentUser.email,

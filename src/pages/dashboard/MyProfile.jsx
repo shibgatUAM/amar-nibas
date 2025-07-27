@@ -18,9 +18,9 @@ import axiosSecure from '@/hooks/axiosSecure';
 import useAuth from '@/hooks/useAuth';
 
 const MyProfile = () => {
-  const { user, loading } = useAuth();
+  const { user, loading, setUser } = useAuth();
   const [filePreview, setFilePreview] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null); // Fixes redline warning
+  const [selectedFile, setSelectedFile] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const {
@@ -32,6 +32,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     if (user) {
+      console.log('User inside useEffect:', user);
       reset({
         name: user?.displayName || '',
         email: user?.email || '',
@@ -71,6 +72,29 @@ const MyProfile = () => {
       if (res.data.modifiedCount > 0) {
         toast.success('Profile updated successfully');
         setDialogOpen(false);
+
+        if (res.data.updatedUser) {
+          const updated = res.data.updatedUser;
+
+          setUser((prev) => {
+            const updatedUser = {
+              ...prev,
+              displayName: updated.name || prev.displayName,
+              photoURL: updated.photoURL || prev.photoURL,
+              role: updated.role || prev.role,
+            };
+
+            reset({
+              name: updatedUser.name,
+              email: updatedUser.email,
+              role: updatedUser.role,
+            });
+
+            setFilePreview(updatedUser.photoURL);
+
+            return updatedUser;
+          });
+        }
       } else {
         toast.error('No changes made');
       }
