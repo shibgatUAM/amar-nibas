@@ -32,7 +32,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     if (user) {
-      console.log('User inside useEffect:', user);
+      // console.log('User inside useEffect:', user);
       reset({
         name: user?.displayName || '',
         email: user?.email || '',

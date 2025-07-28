@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
 import React from 'react';
 import { Alert, AlertTitle } from '../ui/alert';
 import Marquee from 'react-fast-marquee';
 import { Card, CardContent } from '../ui/card';
+import axiosSecure from '@/hooks/axiosSecure';
 
 const fetchReviews = async () => {
-  const res = await axios.get('http://localhost:3000/reviews');
+  const res = await axiosSecure.get('/reviews');
   return res.data;
 };
 

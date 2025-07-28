@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import React from 'react';
 import { Alert, AlertTitle } from '../ui/alert';
 import { Card, CardContent } from '../ui/card';
 import { CircleCheck, CircleX } from 'lucide-react';
 import Button from '../Button';
 import { motion } from 'motion/react';
+import axiosSecure from '@/hooks/axiosSecure';
 
 const fetchAdvData = async () => {
-  const res = await axios.get('http://localhost:3000/advertisements');
+  const res = await axiosSecure.get('/advertisements');
   return res.data;
 };
 

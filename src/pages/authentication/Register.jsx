@@ -36,7 +36,7 @@ const Register = () => {
   const from = location.state?.from || '/';
 
   const onSubmit = async (data) => {
-    console.log(data, createUser);
+    // console.log(data, createUser);
     // createUser(data.email, data.password);
 
     try {
@@ -54,7 +54,7 @@ const Register = () => {
       });
 
       // Save user to backend MongoDB
-      await axios.post('http://localhost:3000/users', {
+      await axiosSecure.post('/users', {
         name: data.fullName,
         email: data.email,
         photoURL: imageUrl,
@@ -64,12 +64,9 @@ const Register = () => {
       });
 
       // get token from backend
-      const { data: tokenData } = await axiosSecure.post(
-        'http://localhost:3000/login',
-        {
-          email: data.email,
-        }
-      );
+      const { data: tokenData } = await axiosSecure.post('/login', {
+        email: data.email,
+      });
       localStorage.setItem('access-token', tokenData.token);
 
       toast.success('Registration successful!');
