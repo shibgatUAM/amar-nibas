@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosSecure = axios.create({
-  baseURL: 'https://amar-nibas-api.vercel.app/',
+  baseURL: 'http://localhost:3000/',
 });
 
 axiosSecure.interceptors.request.use(

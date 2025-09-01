@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import axiosSecure from '@/hooks/axiosSecure';
+import toast from 'react-hot-toast';
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 40 },
@@ -10,10 +12,28 @@ const fadeUpVariant = {
 const ContactUs = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // handle form submission (e.g., API, email)
-    alert('Message sent!');
+
+    const form = e.target;
+    const name = form[0].value;
+    const email = form[1].value;
+    const message = form[2].value;
+
+    try {
+      const res = await axiosSecure.post('/contact', { name, email, message });
+      if (res.data.success) {
+        toast.success('Message sent successfully!');
+        form.reset();
+      } else {
+        toast.error('Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast.error(
+        'An error occurred while sending your message. Please try again later.'
+      );
+    }
   };
 
   return (
